@@ -1,0 +1,27 @@
+body {
+    background:rgba(123, 125, 128, 0.7) url("../images/vikings.jpg") no-repeat top center;
+    background-blend-mode: overlay;
+    background-attachment: scroll;
+    background-size: cover;
+    font-family: 'Baumans', cursive;
+}
+
+h1 {
+    font-family: 'Bungee Shade', cursive;
+    color:white;
+    text-align: center;
+    font-size: 5em;
+}
+
+.card {
+    background-color: rgba(204, 203, 202, 0.644);
+    border-radius: .75rem;
+}
+
+.rag,
+.rol,
+.lag,
+.flo,
+.iva {
+    opacity:1;
+}
