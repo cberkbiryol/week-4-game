@@ -16,6 +16,18 @@ window.onload = function() {
     $("#atkButn").click(vikrpg.plyrAttack);
     // Restart game
     $("#rstButn").click(vikrpg.restart);    
+
+    //add a soundtrack which is controlled by the speaker icon located at the top left part of screen
+    $(".sound_ctrl").click(function() {        
+        if ( $("#audply")[0].paused ) {
+            $("#audply")[0].play().loop = true        
+            // $("#audply")[0];   
+            $(".sound_ctrl").attr("src","assets/images/sound_on.png")
+        } else {
+            $("#audply")[0].pause(); 
+            $(".sound_ctrl").attr("src","assets/images/sound_off.png")            
+        }
+     })
 };
 
 var vikrpg = { characters: ["Ragnar","Rollo","Lagertha","Floki","Ivar"],
@@ -48,6 +60,7 @@ var vikrpg = { characters: ["Ragnar","Rollo","Lagertha","Floki","Ivar"],
                     vikrpg.charsetup(charName,picFile,vikrpg.charHealth);  // Display image & info in Character box
                     vikrpg.gameStage++;    // increment stage to procede 
                     vikrpg.updatemsg();
+                    $("#btlcam").attr("src","assets/images/" + charName.toLowerCase() +"_sel.gif");
                 }  
                 else if (vikrpg.gameStage === 2) { // ******* if stage 2, select enemy *******
                     vikrpg.enmyIndx=vikrpg.characters.indexOf(charName)
@@ -59,7 +72,8 @@ var vikrpg = { characters: ["Ragnar","Rollo","Lagertha","Floki","Ivar"],
                     $(this).closest(".card").addClass("invisible")
                     vikrpg.charsetup(charName,picFile,vikrpg.enmyHealth);  // Display image & info in Defender box      
                     vikrpg.gameStage++;    // increment stage to procede       
-                    vikrpg.updatemsg();        
+                    vikrpg.updatemsg();    
+                    $("#btlcam").attr("src","assets/images/" + charName.toLowerCase() +"_sel.gif");    
                 }                                
             },                
             plyrAttack: function() {
@@ -70,7 +84,9 @@ var vikrpg = { characters: ["Ragnar","Rollo","Lagertha","Floki","Ivar"],
                         $("#battleinfo").text(vikrpg.characters[vikrpg.enmyIndx] + " damaged you by " + vikrpg.enmyDamage + " and you dealt a damage of " + vikrpg.charDamage + " to " + vikrpg.characters[vikrpg.enmyIndx]);           
                         $("#plyrhealth").text(vikrpg.charHealth);
                         $("#defhealth").text(vikrpg.enmyHealth);    
-                        vikrpg.charDamage += vikrpg.basedmg[vikrpg.charIndx];                        
+                        vikrpg.charDamage += vikrpg.basedmg[vikrpg.charIndx];    
+                        var sldnum=Math.floor(Math.random()*6)+1;
+                        $("#btlcam").attr("src","assets/images/randBattl" + sldnum + ".gif")                    
                     } 
                     if ((vikrpg.charHealth <= 0 && vikrpg.enmyHealth >= 0) || vikrpg.charHealth === 0 || vikrpg.charHealth < 0) { // In case of loss
                         $("#rstButn").removeClass("invisible");
@@ -105,6 +121,7 @@ var vikrpg = { characters: ["Ragnar","Rollo","Lagertha","Floki","Ivar"],
                 vikrpg.charElem.toggle();
                 $("#battleinfo").text("...");
                 vikrpg.enmyElem.css("background-color","rgba(204, 203, 202, 0.644)");
+                $("#btlcam").attr("src","assets/images/viki.gif")
             },
             charsetup: function(charName,picFile,hlth) {
                 if (vikrpg.gameStage === 1) {

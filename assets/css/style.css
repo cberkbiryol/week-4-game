@@ -18,10 +18,7 @@ h1 {
     border-radius: .75rem;
 }
 
-.rag,
-.rol,
-.lag,
-.flo,
-.iva {
-    opacity:1;
+.sound_ctrl {
+    position: fixed;
+    width: 6rem;
 }
